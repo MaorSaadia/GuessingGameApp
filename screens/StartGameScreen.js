@@ -1,8 +1,9 @@
 import { TextInput, View, StyleSheet, Alert } from 'react-native';
-import PrimaryButton from '../components/PrimaryButton';
 import { useState } from 'react';
+import PrimaryButton from '../components/ui/PrimaryButton';
+import Colors from '../constants/colors';
 
-function StartGameScreen() {
+function StartGameScreen({ onPickNumber }) {
   const [enterdNumber, setEneterdNumber] = useState('');
 
   function numberInputHandler(enterdText) {
@@ -22,6 +23,8 @@ function StartGameScreen() {
       ]);
       return;
     }
+
+    onPickNumber(chosenNumber);
   }
 
   return (
@@ -56,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 100,
     marginHorizontal: 24,
     padding: 16,
-    backgroundColor: '#61030b',
+    backgroundColor: Colors.primaryRed400,
     borderRadius: 8,
     //Shadow For Android
     elevation: 6,
@@ -70,9 +73,9 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     fontSize: 32,
-    borderBottomColor: '#ddb52f',
+    borderBottomColor: Colors.primaryYellow500,
     borderBottomWidth: 2,
-    color: '#ddb52f',
+    color: Colors.primaryYellow500,
     marginVertical: 8,
     fontWeight: 'bold',
     textAlign: 'center',

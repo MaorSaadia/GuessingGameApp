@@ -1,11 +1,26 @@
-import { StyleSheet, ImageBackground } from 'react-native';
+import { useState } from 'react';
+import { StyleSheet, ImageBackground, SafeAreaView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import * as NavigationBar from 'expo-navigation-bar';
-import StartGameScreen from './screens/StartGameScreen';
 import { StatusBar } from 'expo-status-bar';
+
+import StartGameScreen from './screens/StartGameScreen';
+import GameScreen from './screens/GameScreen';
 
 export default function App() {
   NavigationBar.setVisibilityAsync('hidden');
+
+  const [userNumber, setUserNumber] = useState();
+
+  function pickedNumberHandler(pickedNumber) {
+    setUserNumber(pickedNumber);
+  }
+
+  let screen = <StartGameScreen onPickNumber={pickedNumberHandler} />;
+
+  if (userNumber) {
+    screen = <GameScreen userNumber={userNumber} />;
+  }
 
   return (
     <>
@@ -17,7 +32,7 @@ export default function App() {
           style={styles.rootScreen}
           imageStyle={styles.backgroundImage}
         >
-          <StartGameScreen />
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
         </ImageBackground>
       </LinearGradient>
     </>
