@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet, Alert } from 'react-native';
+import { View, StyleSheet, Alert } from 'react-native';
 import { useState, useEffect } from 'react';
+import { AntDesign } from '@expo/vector-icons';
 import Title from '../components/ui/Title';
 import NumberCotainer from '../components/game/NumberContainer';
-import PrimaryButton from '../components/ui/PrimaryButton';
+import PrimaryButton from '../components/PrimaryButton';
 import Card from '../components/ui/Card';
 import InstructionText from '../components/ui/instructionText';
 
@@ -68,12 +69,12 @@ function GameScreen({ userNumber, onGameOver }) {
         <View style={styles.buttonsContainer}>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'greater')}>
-              +
+              <AntDesign name="upcircleo" size={24} color="white" />
             </PrimaryButton>
           </View>
           <View style={styles.buttonContainer}>
             <PrimaryButton onPress={nextGuessHandler.bind(this, 'lower')}>
-              -
+              <AntDesign name="downcircleo" size={24} color="white" />
             </PrimaryButton>
           </View>
         </View>
