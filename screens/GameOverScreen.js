@@ -1,7 +1,10 @@
 import { Image, View, StyleSheet, Text } from 'react-native';
 import Title from '../components/ui/Title';
+import Colors from '../constants/colors';
+import PrimaryButton from '../components/PrimaryButton';
+import Card from '../components/ui/Card';
 
-function GameOverScereen() {
+function GameOverScereen({ roundsNumber, userNumber, onStartNewGame }) {
   return (
     <View style={styles.rootContainer}>
       <Title>GAME OVER</Title>
@@ -12,7 +15,15 @@ function GameOverScereen() {
         />
         <View style={styles.overlay} />
       </View>
-      <Text>..</Text>
+      <Card>
+        <Text style={styles.summaryText}>
+          Your Phone Needed [
+          <Text style={styles.highlight}> {roundsNumber} </Text>] Rounds To
+          Guess The Number [<Text style={styles.highlight}> {userNumber} </Text>
+          ]
+        </Text>
+      </Card>
+      <PrimaryButton onPress={onStartNewGame}>Start New Game </PrimaryButton>
     </View>
   );
 }
@@ -32,7 +43,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: 'black',
     overflow: 'hidden',
-    margin: 36,
+    marginTop: 24,
   },
   image: {
     width: '100%',
@@ -41,5 +52,15 @@ const styles = StyleSheet.create({
   overlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: 'rgba(0, 0, 0, 0.2)',
+  },
+  summaryText: {
+    //fontFamily: 'open-sans',
+    fontSize: 20,
+    textAlign: 'center',
+    color: 'white',
+  },
+  highlight: {
+    fontFamily: 'open-sans-bold',
+    color: Colors.primaryYellow500,
   },
 });
