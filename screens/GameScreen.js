@@ -1,4 +1,10 @@
-import { View, StyleSheet, Alert, Text, FlatList } from 'react-native';
+import {
+  View,
+  StyleSheet,
+  Alert,
+  useWindowDimensions,
+  FlatList,
+} from 'react-native';
 import { useState, useEffect } from 'react';
 import { AntDesign } from '@expo/vector-icons';
 import Title from '../components/ui/Title';
@@ -27,6 +33,8 @@ function GameScreen({ userNumber, onGameOver }) {
   const intialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(intialGuess);
   const [guessRounds, setGuessRounds] = useState([intialGuess]);
+
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -68,8 +76,10 @@ function GameScreen({ userNumber, onGameOver }) {
 
   const guessRoundsListLength = guessRounds.length;
 
+  const paddingDistance = width < 500 ? 45 : 10;
+
   return (
-    <View style={styles.screen}>
+    <View style={[styles.screen, { padding: paddingDistance }]}>
       <Title>Opponent's Guess</Title>
       <NumberCotainer>{currentGuess}</NumberCotainer>
       <Card>
@@ -113,7 +123,6 @@ export default GameScreen;
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 45,
     alignItems: 'center',
   },
   instructionText: {
